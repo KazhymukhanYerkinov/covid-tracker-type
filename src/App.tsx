@@ -1,24 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.css';
+import { fetchData } from './api';
 
-function App() {
+import { ResponseData } from './api/types';
+import { Cards } from './components';
+
+import image from './images/image.png';
+
+const App: React.FC = () => {
+
+  const [ data, setData ] = React.useState<ResponseData>({} as ResponseData);
+
+  React.useEffect(() => {
+    async function fetchAPI(): Promise<void> {
+      const response =  (await fetchData()) as ResponseData;
+      console.log(response)
+      setData(response);
+    }
+    fetchAPI();
+  }, []);
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.container}>
+      <img className = { styles.image } src = { image } alt = "COVID-19 Tracker"/>
+      <Cards data = { data }/>
     </div>
   );
 }
