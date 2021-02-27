@@ -1,3 +1,5 @@
+// https://covid19.mathdro.id/api
+// https://covid19.mathdro.id/api/countries/<country>
 export type ResponseData = {
     confirmed: {
         value: number
@@ -12,4 +14,26 @@ export type ResponseData = {
     }
     lastUpdate?: Date
     country?: string
+}
+
+// https://covid19.mathdro.id/api/daily
+export type ResponseDailyData = {
+    confirmed: {
+        total: number
+    }
+    recovered: {
+        total: number
+    }
+    deaths: {
+        total: number
+    }
+    reportDate: string
+}
+
+// https://covid19.mathro.id/api/countries
+type Country = {
+    name: string
+}
+export type ResponseCountryData = {
+    countries: Country[]
 }
